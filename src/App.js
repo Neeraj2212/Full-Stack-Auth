@@ -1,20 +1,29 @@
-import React from "react"
-import './App.css';
-import firebase from "firebase";
+/* eslint-disable no-unused-vars */
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
+import SignUp from "./components/signup";
+import SignIn from "./components/signin";
+import "./App.css";
 
 function App() {
-  const firebaseApp = firebase.apps[0];
-  console.log(firebaseApp)
   return (
-    <div className="App">
+    <>
       <div>
-      <h1>React & Firebase</h1>
-      <h2>By @farazamiruddin</h2>
-      <code>
-        <pre>{JSON.stringify(firebaseApp.options, null, 2)}</pre>
-      </code>
-    </div>
-    </div>
+        <Router>
+          <Switch>
+            <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/signin" component={SignIn} />
+            {/* <Route path="/signup" component={SignUp}></Route> */}
+            <Redirect to="/signup" />
+          </Switch>
+        </Router>
+      </div>
+    </>
   );
 }
 
