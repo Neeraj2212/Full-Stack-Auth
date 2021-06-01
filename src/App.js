@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useContext } from "react";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -8,19 +8,33 @@ import {
 } from "react-router-dom";
 import SignUp from "./components/signup";
 import SignIn from "./components/signin";
+import Profile from "./components/profile";
+import NavBar from "./components/NavBar";
+import { userContext } from "./userProvider";
 import "./App.css";
 
 function App() {
+  const user = useContext(userContext);
+  console.log(user);
+
   return (
     <>
       <div>
         <Router>
-          <Switch>
-            <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/signin" component={SignIn} />
-            {/* <Route path="/signup" component={SignUp}></Route> */}
-            <Redirect to="/signup" />
-          </Switch>
+          <NavBar />
+
+          {user != null ? (
+            <Switch>
+              <Route path="/profile" component={Profile}></Route>
+              <Redirect to="/profile" />
+            </Switch>
+          ) : (
+            <Switch>
+              <Route exact path="/signup" component={SignUp} />
+              <Route exact path="/signin" component={SignIn} />{" "}
+              <Redirect to="/signup" />
+            </Switch>
+          )}
         </Router>
       </div>
     </>

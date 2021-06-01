@@ -4,14 +4,14 @@ export const createUser = (email, password) =>
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
-    .then((user) => user.user)
+    .then((user) => user)
     .catch((err) => err.message);
 
 export const signIN = (email, password) =>
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then((user) => user.user)
+    .then((user) => user)
     .catch((err) => {
       console.log(err.message);
       return err.message;
