@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import firebase from "firebase/app";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router } from "react-router-dom";
 import UserProvider from "./userProvider";
 
 const firebaseConfig = {
@@ -22,7 +23,9 @@ firebase.initializeApp(firebaseConfig);
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </UserProvider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -1,11 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from "react";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import SignUp from "./components/signup";
 import SignIn from "./components/signin";
 import Profile from "./components/profile";
@@ -15,28 +10,31 @@ import "./App.css";
 
 function App() {
   const user = useContext(userContext);
-  console.log(user);
 
   return (
     <>
-      <div>
-        <Router>
-          <NavBar />
+      <main>
+        <NavBar />
 
-          {user != null ? (
-            <Switch>
-              <Route path="/profile" component={Profile}></Route>
-              <Redirect to="/profile" />
-            </Switch>
-          ) : (
+        {!user && (
+          <>
             <Switch>
               <Route exact path="/signup" component={SignUp} />
-              <Route exact path="/signin" component={SignIn} />{" "}
-              <Redirect to="/signup" />
+              <Route exact path="/signin" component={SignIn} />
+              <Redirect to="/signup" />{" "}
             </Switch>
-          )}
-        </Router>
-      </div>
+          </>
+        )}
+
+        {user && (
+          <>
+            <Switch>
+              <Route exact path="/profile" component={Profile} />
+              <Redirect to="/profile" />
+            </Switch>
+          </>
+        )}
+      </main>
     </>
   );
 }
